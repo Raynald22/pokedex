@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 function Pokemon() {
   const { pokemonList, removePokemon, updatePokemon } = useStore();
   const [isEditing, setIsEditing] = useState(false);
-  const [editedPokemon, setEditedPokemon] = useState({});
+  const [editPokemon, setEditePokemon] = useState({});
   
   const navigate = useNavigate();
 
@@ -33,20 +33,21 @@ function Pokemon() {
 	console.log('name', name);
 	console.log('value', value);
 	// buat nyimpen value
-    setEditedPokemon({
-      ...editedPokemon,
+	const valueEdit = editPokemon;
+    setEditePokemon({
+      ...valueEdit,
       [name]: value,
     });
   };
 
   const handleEditSubmit = (e) => {
     e.preventDefault();
-    updatePokemon(editedPokemon);
+    updatePokemon(editPokemon);
     setIsEditing(false);
   };
 
   const handleEditPokemon = (pokemon) => {
-    setEditedPokemon(pokemon);
+    setEditePokemon(pokemon);
     setIsEditing(true);
   };
 
@@ -118,7 +119,7 @@ function Pokemon() {
 
                 <div className="flex flex-wrap gap-x-2">
                   <p className="flex items-center text-xs font-medium text-white py-1.5 px-3 rounded-full bg-red-500">
-                    Weakness: {pokemon.weakness}
+                    Weakness: 🌿
                   </p>
                 </div>
 
@@ -176,7 +177,7 @@ function Pokemon() {
                       id="name"
                       className="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                       placeholder="Type Pokémon name"
-                      value={editedPokemon.name}
+                      value={editPokemon.name}
                       onChange={handleInputChange}
                       required
                     />
@@ -191,7 +192,7 @@ function Pokemon() {
                     <select
                       id="type"
                       name="type"
-                      value={editedPokemon.type}
+                      value={editPokemon.type}
                       onChange={handleInputChange}
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg"
                       required
@@ -215,7 +216,7 @@ function Pokemon() {
                       id="description"
                       rows="4"
 					  name="description"
-                      value={editedPokemon.description}
+                      value={editPokemon.description}
                       onChange={handleInputChange}
                       className="block p-2.5 w-full text-sm text-black bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="Write Pokémon description here"

@@ -13,8 +13,8 @@ function About() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
+    setFormData((formData) => ({
+      ...formData,
       [name]: value,
     }));
   };
@@ -27,7 +27,7 @@ function About() {
 
   return (
     <div className="flex justify-between space-x-8 py-8 px-4 pl-20 pr-20 pt-52">
-      <div className="max-w-3xl w-full bg-white p-6 rounded-lg shadow-lg">
+      <div className="max-w-3xl w-full bg-stone-200 p-6 rounded-lg shadow-lg">
       
         <div className="flex items-center mb-6">
           <img
@@ -69,20 +69,14 @@ function About() {
               className="w-full p-2 border border-gray-300 rounded"
               placeholder="Description"
             />
-            <button
-              type="submit"
-              className="w-full bg-blue-500 text-white py-2 rounded"
-            >
-              Save Changes
-            </button>
           </form>
         )}
 
         <button
-          onClick={() => setIsEditing((prev) => !prev)}
+          onClick={() => setIsEditing((value) => !value)}
           className="mt-4 text-blue-500"
         >
-          {isEditing ? "Cancel" : "Edit"}
+          {isEditing ? "Done" : "Edit"}
         </button>
       </div>
 

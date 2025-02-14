@@ -8,9 +8,9 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 function Chart() {
   const { pokemonList } = useStore();
 
-  const typeCounts = pokemonList.reduce((acc, pokemon) => {
-    acc[pokemon.type] = (acc[pokemon.type] || 0) + 1;
-    return acc;
+  const typeCounts = pokemonList.reduce((list, pokemon) => {
+    list[pokemon.type] = (list[pokemon.type] || 0) + 1;
+    return list;
   }, {});
 
   const typeColors = {
