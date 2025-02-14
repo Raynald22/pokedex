@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import useStore from "../store/store";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 function Form() {
   const [name, setName] = useState("");
@@ -8,6 +10,8 @@ function Form() {
   const [type, setType] = useState("-- Choose Type --");
   const { addPokemon } = useStore();
   const { setImageUrl } = useStore();
+
+  const navigate = useNavigate();
 
   const handleImage = (e) => {
     const file = e.target.files[0];
@@ -20,6 +24,11 @@ function Form() {
         };
         reader.readAsDataURL(file);
     }
+  };
+
+  const handleBack = () => {
+    console.log("Back to Home");
+    navigate("/pokemon");
   };
 
   const handleSubmit = (e) => {
@@ -45,6 +54,15 @@ function Form() {
     setDescription("");
     setImage(null);
     setType("Fire");
+
+    Swal.fire({
+        title: "Success",
+        text: "Pokemon has been added to pokedex",
+        icon: "success",
+        confirmButtonText: "Done",
+      }).then(() => {
+        navigate("/pokemon");
+      })
   };
 
   return (
@@ -55,7 +73,7 @@ function Form() {
             type="text"
             name="pokemon_name"
             id="pokemon_name"
-            className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             placeholder=" "
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -74,7 +92,7 @@ function Form() {
             type="text"
             name="pokemon_description"
             id="pokemon_description"
-            className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             placeholder=" "
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -114,10 +132,10 @@ function Form() {
             onChange={(e) => setType(e.target.value)}
             required
           >
-            <option value="Fire">Fire</option>
-            <option value="Water">Water</option>
-            <option value="Electric">Electric</option>
-            <option value="Physic">Physic</option>
+            <option className="text-black" value="Fire">Fire</option>
+            <option className="text-black" value="Water">Water</option>
+            <option className="text-black" value="Electric">Electric</option>
+            <option className="text-black" value="Physic">Physic</option>
           </select>
           <label
             htmlFor="pokemon_type"
@@ -132,6 +150,13 @@ function Form() {
           className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
           Submit
+        </button> &nbsp;
+        <button
+          type="button"
+          onClick={handleBack}
+          className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        >
+          Back
         </button>
       </form>
     </div>

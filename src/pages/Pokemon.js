@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useStore from "../store/store";
+import Swal from "sweetalert2";
 
 function Pokemon() {
   const { pokemonList, removePokemon, updatePokemon } = useStore();
@@ -16,6 +17,15 @@ function Pokemon() {
   const handleRemovePokemon = (pokemonId) => {
 	console.log('pokemon id', pokemonId);
     removePokemon(pokemonId);
+
+	Swal.fire({
+		title: "Deleted",
+		text: "Pokemon has been deleted",
+		icon: "success",
+		confirmButtonText: "Done",
+	}).then(() => {
+		navigate("/pokemon");
+	})
   };
 
   const handleInputChange = (e) => {
@@ -42,7 +52,7 @@ function Pokemon() {
 
   return (
     <div className="pt-10 px-4 pb-10">
-      <div className="flex justify-end mb-10">
+      <div className="flex justify-end mb-10 mr-20">
         <button
           className="px-6 py-3.5 text-base font-medium text-black bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:outline-none focus:ring-yellow-300 rounded-full text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition duration-200"
           type="button"
@@ -54,7 +64,9 @@ function Pokemon() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {pokemonList.length === 0 ? (
-          <p className="text-center text-xl text-white">No Pokémon available</p>
+			<div className="justify-center">
+          		<p className="text-center text-xl text-white">No Pokémon available</p>
+			</div>
         ) : (
           pokemonList.map((pokemon) => (
             <div

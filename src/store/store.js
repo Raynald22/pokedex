@@ -21,10 +21,10 @@ const useStore = create((set) => ({
   pokemonList: JSON.parse(localStorage.getItem("pokemonList")) || [],
 
   generatePokemonId: () => {
-    console.log('lastPokemonId', localStorage.getItem("lastPokemonId"));
-    let idPokemon = parseInt(localStorage.getItem("lastPokemonId")) || 0;
+    console.log('pokemonId', localStorage.getItem("pokemonId"));
+    let idPokemon = parseInt(localStorage.getItem("pokemonId")) || 0;
     const addId = idPokemon + 1;
-    localStorage.setItem("lastPokemonId", addId);
+    localStorage.setItem("pokemonId", addId);
     return addId;
   },
 
@@ -40,11 +40,11 @@ const useStore = create((set) => ({
 
   removePokemon: (pokemonId) =>
     set((state) => {
-      const updatedList = state.pokemonList.filter(
+      const deletePokemon = state.pokemonList.filter(
         (pokemon) => pokemon.id !== pokemonId
       );
-      localStorage.setItem("pokemonList", JSON.stringify(updatedList));
-      return { pokemonList: updatedList };
+      localStorage.setItem("pokemonList", JSON.stringify(deletePokemon));
+      return { pokemonList: deletePokemon };
     }),
   
 
