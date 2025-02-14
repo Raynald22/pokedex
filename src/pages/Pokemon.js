@@ -22,6 +22,7 @@ function Pokemon() {
     const { name, value } = e.target;
 	console.log('name', name);
 	console.log('value', value);
+	// buat nyimpen value
     setEditedPokemon({
       ...editedPokemon,
       [name]: value,
