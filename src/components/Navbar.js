@@ -75,7 +75,7 @@ const Navbar = () => {
             {/* buat profile */}
             <div className="relative ml-3">
               <img
-                class="size-8 rounded-full"
+                className="size-8 rounded-full"
                 src={require("../assets/images/profile.png")}
                 alt="profile"
               />

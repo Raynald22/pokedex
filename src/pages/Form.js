@@ -7,7 +7,7 @@ function Form() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
-  const [type, setType] = useState("-- Choose Type --");
+  const [type, setType] = useState("");
   const { addPokemon } = useStore();
   const { setImageUrl } = useStore();
 
