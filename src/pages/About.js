@@ -28,7 +28,6 @@ function About() {
   return (
     <div className="flex justify-between space-x-8 py-8 px-4 pl-20 pr-20 pt-52">
       <div className="max-w-3xl w-full bg-stone-200 p-6 rounded-lg shadow-lg">
-      
         <div className="flex items-center mb-6">
           <img
             src={require("../assets/images/profile.png")}
@@ -36,7 +35,9 @@ function About() {
             className="w-24 h-24 rounded-full object-cover mr-6"
           />
           <div>
-            <h2 className="text-2xl font-bold text-gray-800">{formData.name}</h2>
+            <h2 className="text-2xl font-bold text-gray-800">
+              {formData.name}
+            </h2>
             <p className="text-gray-600">{formData.position}</p>
           </div>
         </div>
@@ -69,6 +70,13 @@ function About() {
               className="w-full p-2 border border-gray-300 rounded"
               placeholder="Description"
             />
+
+            <button
+              type="submit"
+              className="w-full bg-blue-500 text-white py-2 rounded"
+            >
+              Save Changes
+            </button>
           </form>
         )}
 
@@ -76,7 +84,7 @@ function About() {
           onClick={() => setIsEditing((value) => !value)}
           className="mt-4 text-blue-500"
         >
-          {isEditing ? "Done" : "Edit"}
+          {isEditing ? "" : "Edit"}
         </button>
       </div>
 
