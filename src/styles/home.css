@@ -1,0 +1,38 @@
+.hero {
+  margin-top: 5rem;
+}
+
+.first {
+  font-family: 'Poppins';
+  font-weight: bold;
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.hero h1, .hero p, .hero button {
+  animation: slideInFromLeft 1s ease-out forwards;
+}
+
+.img-hero img {
+  animation: slideInFromRight 1s ease-out forwards;
+}

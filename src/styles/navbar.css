@@ -1,0 +1,28 @@
+@font-face {
+    font-family: 'navFont';
+    src: local('navFont'), url(../assets/font/SupremeSpike-KVO8D.otf) format('otf');
+}
+
+nav {
+    font-family: 'navFont';
+    font-size: 18px;
+    text-align: center;
+    color: white;
+}
+
+.bell-icon {
+    position: relative;
+    width: 30px;
+    height: 30px;
+  }
+  
+  .notification-dot {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: red;
+    border: none;
+  }
