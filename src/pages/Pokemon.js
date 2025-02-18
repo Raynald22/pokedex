@@ -7,7 +7,8 @@ function Pokemon() {
   const { pokemonList, removePokemon, updatePokemon } = useStore();
   const [isEditing, setIsEditing] = useState(false);
   const [editPokemon, setEditePokemon] = useState({});
-  
+  const [isImageOpen, setIsImageOpen] = useState(false);
+
   const navigate = useNavigate();
 
   const navigateToForm = () => {
@@ -51,6 +52,33 @@ function Pokemon() {
     setIsEditing(true);
   };
 
+  const handleImageEdit = (e) => {
+    const file = e.target.files[0];
+  
+    if (file) {
+      const reader = new FileReader(); 
+  
+      reader.onloadend = () => {
+        setEditePokemon({
+          ...editPokemon,
+          imageUrl: reader.result
+        })
+        // setImage(reader.result); 
+      };
+  
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const openPreview = () => {
+    setIsImageOpen(true)
+  };
+
+  const closePreview = () => {
+    setIsImageOpen(false);
+  };
+  
+
   return (
     <div className="pt-10 px-4 pb-10">
       <div className="flex justify-end mb-10 mr-20">
@@ -65,9 +93,11 @@ function Pokemon() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {pokemonList.length === 0 ? (
-			<div className="justify-center">
-          		<p className="text-center text-xl text-white">No Pokémon available</p>
-			</div>
+          <div className="justify-center">
+            <p className="text-center text-xl text-white">
+              No Pokémon available
+            </p>
+          </div>
         ) : (
           pokemonList.map((pokemon) => (
             <div
@@ -184,6 +214,51 @@ function Pokemon() {
                   </div>
                   <div className="col-span-2">
                     <label
+                      htmlFor="image"
+                      className="block mb-2 text-sm font-medium text-white dark:text-white"
+                    >
+                      Image
+                    </label>
+                    {editPokemon.imageUrl && (
+                      <div className="mt-4">
+                        <img
+                          src={editPokemon.imageUrl}
+                          alt="Pokemon preview"
+                          className="w-32 h-32 object-contain cursor-pointer"
+                          onClick={openPreview} // Open the modal on image click
+                        />
+                      </div>
+                    )}
+
+                    {/* Modal for Full Image */}
+                    {isImageOpen && (
+                      <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+                        <div className="relative p-4 w-full max-w-2xl">
+                          <button
+                            onClick={closePreview}
+                            className="absolute top-2 right-2 text-white bg-gray-800 p-2 rounded-full"
+                          >
+                            X
+                          </button>
+                          <img
+                            src={editPokemon.imageUrl}
+                            alt="Full Pokemon"
+                            className="w-full h-auto object-contain"
+                          />
+                        </div>
+                      </div>
+                    )}
+                    <input
+                      type="file"
+                      name="image"
+                      id="image"
+                      accept="image/*"
+                      className="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                      onChange={handleImageEdit}
+                    />
+                  </div>
+                  <div className="col-span-2">
+                    <label
                       htmlFor="type"
                       className="block mb-2 text-sm font-medium text-white dark:text-white"
                     >
@@ -215,7 +290,7 @@ function Pokemon() {
                     <textarea
                       id="description"
                       rows="4"
-					  name="description"
+                      name="description"
                       value={editPokemon.description}
                       onChange={handleInputChange}
                       className="block p-2.5 w-full text-sm text-black bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -223,21 +298,21 @@ function Pokemon() {
                     ></textarea>
                   </div>
                 </div>
-				<div className="flex justify-between">
-				<button
-                  type="submit"
-                  className="px-6 py-2.5 text-base font-medium text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-full transition duration-200"
-                >
-                  Save
-                </button>
-                <button
-                  type="button"
-                  className="px-6 py-2.5 text-base font-medium text-white bg-gray-600 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-full transition duration-200"
-                  onClick={() => setIsEditing(false)} 
-                >
-                  Cancel
-                </button>
-				</div>
+                <div className="flex justify-between">
+                  <button
+                    type="submit"
+                    className="px-6 py-2.5 text-base font-medium text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-full transition duration-200"
+                  >
+                    Save
+                  </button>
+                  <button
+                    type="button"
+                    className="px-6 py-2.5 text-base font-medium text-white bg-gray-600 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-full transition duration-200"
+                    onClick={() => setIsEditing(false)}
+                  >
+                    Cancel
+                  </button>
+                </div>
               </form>
             </div>
           </div>

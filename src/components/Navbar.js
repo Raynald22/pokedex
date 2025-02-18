@@ -52,7 +52,7 @@ const Navbar = () => {
             </Link>
           </div>
 
-          <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 mr-10">
+          <div className="hidden md:flex absolute inset-y-0 right-0 items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 mr-10">
             {/* buat notif */}
             <svg
               className="bell-icon"
@@ -105,19 +105,19 @@ const Navbar = () => {
 
         <div className={`${isMenuOpen ? "block" : "hidden"} md:hidden`}>
           <Link
-            to="#"
+            to="/"
             className="block px-4 py-2 text-white hover:text-yellow-400"
           >
             Home
           </Link>
           <Link
-            to="#about"
+            to="/about"
             className="block px-4 py-2 text-white hover:text-yellow-400"
           >
             About
           </Link>
           <Link
-            to="#contact"
+            to="/pokemon"
             className="block px-4 py-2 text-white hover:text-yellow-400"
           >
             Pokémon
